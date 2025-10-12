@@ -11,7 +11,7 @@ current_file = __file__
 data_folder = os.path.join(os.path.dirname(current_file), "..", "data")
 model_path = os.path.join(data_folder, "models", "mnist_model.pth")
 
-train = torchvision.datasets.MNIST(root=data_folder, train=True, transform=torchvision.transforms.ToTensor())
+train = torchvision.datasets.MNIST(root=data_folder, train=True, download=True, transform=torchvision.transforms.ToTensor())
 train_loader = DataLoader(train, batch_size=64, shuffle=True)
 
 model = nn.Sequential(
