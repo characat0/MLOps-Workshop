@@ -1,11 +1,17 @@
 import torch, torchvision
-from torch.utils.data import TensorDataset, DataLoader
+from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
+import os
 
 
+current_file = __file__
 
-train = torchvision.datasets.MNIST(root="../data", train=True, download=True, transform=torchvision.transforms.ToTensor())
+
+data_folder = os.path.join(os.path.dirname(current_file), "..", "data")
+model_path = os.path.join(data_folder, "models", "mnist_model.pth")
+
+train = torchvision.datasets.MNIST(root=data_folder, train=True, transform=torchvision.transforms.ToTensor())
 train_loader = DataLoader(train, batch_size=64, shuffle=True)
 
 model = nn.Sequential(
@@ -34,4 +40,4 @@ for epoch in range(1):
     print(f"Epoch {epoch+1}, Loss: {running_loss/len(train_loader):.4f}")
 
 
-torch.save(model.state_dict(), "../data/models/mnist_model.pth")
+torch.save(model.state_dict(), model_path)
