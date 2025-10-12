@@ -18,6 +18,6 @@ RUN conda run -n uni_deep_learning python src/train.py
 
 COPY src/inference.py src/inference.py
 
-CMD ["conda", "run", "-n", "uni_deep_learning", "python", "src/inference.py"]
+ENTRYPOINT ["conda", "run", "-n", "uni_deep_learning", "python", "src/inference.py"]
 
 
