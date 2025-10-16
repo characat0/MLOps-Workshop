@@ -20,3 +20,9 @@ docker run -it mnist_clasification_jts /bin/bash
 # EJM : ENTRYPOINT ["conda", "run", "-n", "uni_deep_learning", "python", "src/inference.py"]
 
 docker run uni_deep_learning "https://raw.githubusercontent.com/lABrass/mnist-png/master/train/0/0006d579-9bff-42f4-b631-1a1b0f71a64f.png"
+
+#######################
+
+
+## Para crear el docker 
+docker build . -t heart_failure_prediction_jts
