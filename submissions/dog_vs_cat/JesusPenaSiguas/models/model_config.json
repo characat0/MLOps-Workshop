@@ -1,0 +1,21 @@
+{
+  "model_name": "cat_dog_classifier",
+  "version": "1.0",
+  "img_size": 150,
+  "classes": [
+    "cat",
+    "dog"
+  ],
+  "preprocessing": {
+    "rescale": "1./255",
+    "target_size": [
+      150,
+      150
+    ]
+  },
+  "training_info": {
+    "epochs": 20,
+    "batch_size": 32,
+    "learning_rate": 0.001
+  }
+}
