@@ -8,17 +8,27 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
 import io
+import os
+import cloudpickle
+current_file = __file__
+
+
+data_folder = os.path.join(os.path.dirname(current_file), "..", "data")
+data_file = os.path.join(data_folder, "train.txt")
+data_file_test = os.path.join(data_folder, "test.txt")
+model_path = os.path.join(data_folder, "model", "model.pkl")
 
 
 # Read the text file, using semicolon as separator - JHAMPIER
-df_train = pd.read_csv('../data/train.txt', 
+df_train = pd.read_csv(data_file, 
                  sep=';', 
                  header=None, 
                  names=['text', 'label'])
-df_test = pd.read_csv('../data/test.txt', 
-                 sep=';', 
-                 header=None, 
-                 names=['text', 'label'])
+
+# df_test = pd.read_csv('../data/test.txt', 
+#                  sep=';', 
+#                  header=None, 
+#                  names=['text', 'label'])
 
 
 
@@ -30,14 +40,14 @@ tfidf_vectorizer
 
 X_train = df_train['text']
 y_train = df_train['label']
-X_test = df_test['text']
-y_test = df_test['label']
+# X_test = df_test['text']
+# y_test = df_test['label']
 
 # Ajustar (aprender vocabulario) y transformar los datos de entrenamiento
 X_train_vectorized = tfidf_vectorizer.fit_transform(X_train)
 
 # Transformar los datos de prueba usando el vocabulario aprendido
-X_test_vectorized = tfidf_vectorizer.transform(X_test)
+# X_test_vectorized = tfidf_vectorizer.transform(X_test)
 
 print("Datos vectorizados correctamente.")
 print("-" * 35)
@@ -52,9 +62,9 @@ print("Entrenamiento Finalizado. 🎉")
 print("-" * 35)
 
 # --- 5. Evaluación del Modelo ---
-y_pred = model.predict(X_test_vectorized)
+# y_pred = model.predict(X_test_vectorized)
 
 # Cálculo de la Precisión
-accuracy = accuracy_score(y_test, y_pred)
+# accuracy = accuracy_score(y_test, y_pred)
 
 cloudpickle.dump(model, open(model_path, "wb"))

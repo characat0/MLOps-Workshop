@@ -12,6 +12,10 @@ COPY data/train.txt data/train.txt
 
 RUN mkdir -p data/model
 
+COPY src/train.py src/train.py
+
 RUN python src/train.py
+
+#RUN ../../../../venvuni/bin/python src/train.py
 
 ENTRYPOINT [ "python", "src/docs.py" ]
