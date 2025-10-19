@@ -1,0 +1,37 @@
+import torch, torchvision
+from torch.utils.data import TensorDataset, DataLoader
+import torch.nn as nn
+import torch.optim as optim
+
+
+
+train = torchvision.datasets.MNIST(root="../data", train=True, download=True, transform=torchvision.transforms.ToTensor())
+train_loader = DataLoader(train, batch_size=64, shuffle=True)
+
+model = nn.Sequential(
+    nn.Flatten(),
+    nn.Linear(28*28,128),
+    nn.ReLU(),
+    nn.Linear(128,64),
+    nn.ReLU(),
+    nn.Linear(64,10)
+)
+
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+for epoch in range(1):
+    running_loss = 0.0
+    for images, labels in train_loader:
+        optimizer.zero_grad()
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        running_loss += loss.item()
+    print(f"Epoch {epoch+1}, Loss: {running_loss/len(train_loader):.4f}")
+
+
+torch.save(model.state_dict(), "../data/models/mnist_model.pth")
