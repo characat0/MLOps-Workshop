@@ -1,3 +1,9 @@
+submissions/text_classification/josefernandez/data/model/
+*.joblib
+*.pkl
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
