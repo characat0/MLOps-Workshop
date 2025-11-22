@@ -10,9 +10,8 @@ import numpy as np
 import sys
 
 if len(sys.argv) < 2:
-    print("Error: Missing URL argument")
+    print("Error: Please provide a URL as a command-line argument.")
     print("Usage: python inference.py <image_url>")
-    print("Example: python inference.py https://example.com/image.png")
     sys.exit(1)
 
 url = sys.argv[1]
