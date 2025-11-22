@@ -9,6 +9,11 @@ import os
 import numpy as np
 import sys
 
+if len(sys.argv) < 2:
+    print("Error: Please provide a URL as a command-line argument.")
+    print("Usage: python inference.py <image_url>")
+    sys.exit(1)
+
 url = sys.argv[1]
 response = requests.get(url)
 image = PIL.Image.open(BytesIO(response.content))
